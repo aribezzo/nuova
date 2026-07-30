@@ -2,6 +2,7 @@ package com.alessandro.batterytracker.ui.components
 
 import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.RepeatMode
+import androidx.compose.animation.core.animateFloat
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.infiniteRepeatable
 import androidx.compose.animation.core.rememberInfiniteTransition
@@ -14,7 +15,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.geometry.CornerRadius
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
@@ -89,8 +89,9 @@ fun BatteryWaveIndicator(
                 wavePath.moveTo(0f, baseY)
                 var x = 0f
                 val step = 4f
+                val piFloat = Math.PI.toFloat()
                 while (x <= width) {
-                    val y = baseY + sin((x / width) * 4 * Math.PI + wavePhase).toFloat() * waveHeight
+                    val y = baseY + sin(((x / width) * 4f * piFloat + wavePhase).toDouble()).toFloat() * waveHeight
                     wavePath.lineTo(x, y)
                     x += step
                 }
