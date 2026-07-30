@@ -13,6 +13,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.BatteryAlert
 import androidx.compose.material.icons.filled.PhoneAndroid
 import androidx.compose.material.icons.filled.Timelapse
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -36,11 +37,19 @@ fun DailyScreen(dailyStats: List<DayStat>) {
     }
     LazyColumn(
         modifier = Modifier.fillMaxSize(),
-        contentPadding = PaddingValues(horizontal = 20.dp, vertical = 24.dp),
+        contentPadding = PaddingValues(
+            start = 20.dp,
+            top = 24.dp,
+            end = 20.dp,
+            bottom = 80.dp // Spazio di sicurezza per la bottom bar
+        ),
         verticalArrangement = Arrangement.spacedBy(14.dp)
     ) {
         item {
-            Text(text = "Consumo giornaliero", style = androidx.compose.material3.MaterialTheme.typography.headlineMedium)
+            Text(
+                text = "Consumo giornaliero",
+                style = MaterialTheme.typography.headlineMedium
+            )
         }
         items(dailyStats) { day ->
             ExpandableCard(
@@ -68,7 +77,7 @@ fun DailyScreen(dailyStats: List<DayStat>) {
                             text = "Segmenti (ricarica effettuata durante il giorno)",
                             color = TextSecondary,
                             fontWeight = FontWeight.Medium,
-                            style = androidx.compose.material3.MaterialTheme.typography.labelSmall
+                            style = MaterialTheme.typography.labelSmall
                         )
                         day.segments.forEachIndexed { index, seg ->
                             Spacer(modifier = Modifier.height(8.dp))
