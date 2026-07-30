@@ -1,5 +1,6 @@
 package com.alessandro.batterytracker.ui
 
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -40,6 +41,7 @@ private val tabs = listOf(
     TabItem("Cicli", Icons.Filled.BatteryChargingFull)
 )
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun MainScreen() {
     val viewModel: MainViewModel = viewModel()
