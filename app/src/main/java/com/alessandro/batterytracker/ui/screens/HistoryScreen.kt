@@ -3,6 +3,7 @@ package com.alessandro.batterytracker.ui.screens
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
@@ -11,10 +12,12 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.BatteryFull
 import androidx.compose.material.icons.filled.PhoneAndroid
 import androidx.compose.material.icons.filled.Timelapse
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.alessandro.batterytracker.data.ChargeSession
 import com.alessandro.batterytracker.data.formatDateTimeItalian
@@ -35,11 +38,19 @@ fun HistoryScreen(sessions: List<ChargeSession>) {
     }
     LazyColumn(
         modifier = Modifier.fillMaxSize(),
-        contentPadding = PaddingValues(horizontal = 20.dp, vertical = 24.dp),
+        contentPadding = PaddingValues(
+            start = 20.dp,
+            top = 24.dp,
+            end = 20.dp,
+            bottom = 80.dp // Spazio di sicurezza per la bottom bar
+        ),
         verticalArrangement = Arrangement.spacedBy(14.dp)
     ) {
         item {
-            Text(text = "Storico sessioni", style = androidx.compose.material3.MaterialTheme.typography.headlineMedium)
+            Text(
+                text = "Storico sessioni",
+                style = MaterialTheme.typography.headlineMedium
+            )
         }
         items(sessions) { session ->
             val durationMillis = (session.endTime ?: System.currentTimeMillis()) - session.startTime
@@ -56,14 +67,14 @@ fun HistoryScreen(sessions: List<ChargeSession>) {
                         value = formatDuration(session.activeMillis),
                         accentColor = CyanAccent
                     )
-                    androidx.compose.foundation.layout.Spacer(modifier = Modifier.padding(top = 8.dp))
+                    Spacer(modifier = Modifier.padding(top = 8.dp))
                     StatCard(
                         icon = Icons.Filled.Timelapse,
                         label = "Schermo spento",
                         value = formatDuration(session.inactiveMillis),
                         accentColor = TextSecondary
                     )
-                    androidx.compose.foundation.layout.Spacer(modifier = Modifier.padding(top = 8.dp))
+                    Spacer(modifier = Modifier.padding(top = 8.dp))
                     StatCard(
                         icon = Icons.Filled.BatteryFull,
                         label = "Batteria consumata",
@@ -79,10 +90,16 @@ fun HistoryScreen(sessions: List<ChargeSession>) {
 @Composable
 fun EmptyState(text: String) {
     Column(
-        modifier = Modifier.fillMaxSize().padding(32.dp),
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(horizontal = 32.dp, vertical = 80.dp),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text(text = text, color = TextSecondary, textAlign = androidx.compose.ui.text.style.TextAlign.Center)
+        Text(
+            text = text,
+            color = TextSecondary,
+            textAlign = TextAlign.Center
+        )
     }
 }
