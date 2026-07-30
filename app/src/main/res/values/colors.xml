@@ -1,0 +1,9 @@
+<resources>
+    <color name="bg_dark">#0B0F19</color>
+    <color name="surface_dark">#141A2A</color>
+    <color name="accent_cyan">#00E5FF</color>
+    <color name="accent_purple">#B388FF</color>
+    <color name="accent_green">#00E676</color>
+    <color name="accent_orange">#FF9100</color>
+    <color name="accent_red">#FF5252</color>
+</resources>
