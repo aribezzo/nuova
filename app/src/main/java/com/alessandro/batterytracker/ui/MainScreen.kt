@@ -15,13 +15,15 @@ import androidx.compose.material.icons.filled.Home
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Tab
-import androidx.compose.material3.TabRow
+import androidx.compose.material3.ScrollableTabRow
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.alessandro.batterytracker.ui.screens.CyclesScreen
 import com.alessandro.batterytracker.ui.screens.DailyScreen
@@ -52,16 +54,23 @@ fun MainScreen() {
     Scaffold(
         containerColor = BgDark,
         topBar = {
-            TabRow(
+            ScrollableTabRow(
                 selectedTabIndex = pagerState.currentPage,
                 containerColor = BgDark,
-                contentColor = CyanAccent
+                contentColor = CyanAccent,
+                edgePadding = 8.dp
             ) {
                 tabs.forEachIndexed { index, tab ->
                     Tab(
                         selected = pagerState.currentPage == index,
                         onClick = { scope.launch { pagerState.animateScrollToPage(index) } },
-                        text = { Text(tab.label) },
+                        text = { 
+                            Text(
+                                text = tab.label,
+                                fontSize = 13.sp,
+                                maxLines = 1
+                            ) 
+                        },
                         icon = { Icon(imageVector = tab.icon, contentDescription = tab.label) },
                         selectedContentColor = CyanAccent,
                         unselectedContentColor = TextSecondary
